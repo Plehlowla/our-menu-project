@@ -75,6 +75,9 @@ const menu = [
 
 const sectionCenter = document.querySelector('.section-center');
 
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// loading item
 window.addEventListener('DOMContentLoaded', function(){
   // console.log('Shake and Bake');
   // let displayMenu = menu.map(function(item){
@@ -93,10 +96,19 @@ window.addEventListener('DOMContentLoaded', function(){
   // displayMenu = displayMenu.join("")
   // // console.log(displayMenu);
   // sectionCenter.innerHTML = displayMenu;
-  
+
   displayMenuItems(menu);
+});
+
+// filter items
+filterBtns.forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    console.log(e.currentTarget.dataset);
+  })
 })
 
+
+// items
 function displayMenuItems(menuItems){
   let displayMenu = menuItems.map(function(item){
     // console.log(item);
@@ -111,7 +123,7 @@ function displayMenuItems(menuItems){
             </div>
             </article>`
   })
-  displayMenu = displayMenu.join("")
+  displayMenu = displayMenu.join("");
   // console.log(displayMenu);
   sectionCenter.innerHTML = displayMenu;
 }
