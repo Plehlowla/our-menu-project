@@ -82,8 +82,9 @@ const menu = [
   ];
 
 const sectionCenter = document.querySelector('.section-center');
+const container = document.querySelector('.btn-container')
 
-const filterBtns = document.querySelectorAll('.filter-btn');
+// const filterBtns = document.querySelectorAll('.filter-btn');
 
 // loading item
 window.addEventListener('DOMContentLoaded', function(){
@@ -106,30 +107,12 @@ window.addEventListener('DOMContentLoaded', function(){
   // sectionCenter.innerHTML = displayMenu;
 
   displayMenuItems(menu);
+
+  displayMenuButton();
+
+  
 });
 
-// filter items
-filterBtns.forEach(function(btn){
-  btn.addEventListener('click', function(e){
-    // console.log(e.currentTarget.dataset.id);
-    const category = e.currentTarget.dataset.id;
-
-    const menuCategory = menu.filter(function(menuItem){
-      // console.log(menuItem.category);
-
-      if(menuItem.category === category){
-        return menuItem
-      }
-    })
-    
-        if(category === 'all'){
-          displayMenuItems(menu);
-        }else{
-          displayMenuItems(menuCategory)
-        }
-    // console.log(menuCategory);
-  })
-})
 
 
 // items
@@ -150,4 +133,45 @@ function displayMenuItems(menuItems){
   displayMenu = displayMenu.join("");
   // console.log(displayMenu);
   sectionCenter.innerHTML = displayMenu;
+}
+
+function displayMenuButton(){
+  const categories = menu.reduce(function(values, item){
+    if(!values.includes(item.category)){
+      values.push(item.category);
+    }
+    return values;
+  },['all']);
+  // console.log(categories);
+
+  const categoryBtns = categories.map(function(catergory){
+    return `<button class="filter-btn" type="button" data-id=${catergory}>${catergory}</button> `
+  }).join("");
+  
+  container.innerHTML = categoryBtns;
+  
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  
+  // filter items
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      // console.log(e.currentTarget.dataset.id);
+      const category = e.currentTarget.dataset.id;
+  
+      const menuCategory = menu.filter(function(menuItem){
+        // console.log(menuItem.category);
+  
+        if(menuItem.category === category){
+          return menuItem
+        }
+      })
+      
+          if(category === 'all'){
+            displayMenuItems(menu);
+          }else{
+            displayMenuItems(menuCategory)
+          }
+      // console.log(menuCategory);
+    })
+  })
 }
