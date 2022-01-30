@@ -1,6 +1,6 @@
 # our menu project
  
 
-#![ourMenu](ourMenu.png)
+![ourMenu](ourMenu.png)
 
-https://plehlowla.github.io/our-menu-project/
+# https://plehlowla.github.io/our-menu-project/
